@@ -7,6 +7,14 @@ const PORT = process.env.PORT || 5000;
 app.use(cors());
 app.use(express.json());
 
+// Root route for health check and Render deployment validation
+app.get('/', (req, res) => {
+  res.json({
+    status: "success",
+    message: "VerseCanvas backend is running 🚀"
+  });
+});
+
 app.get('/api/verse', async (req, res) => {
   try {
     const { q } = req.query;
