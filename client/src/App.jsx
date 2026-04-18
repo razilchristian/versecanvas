@@ -74,7 +74,10 @@ export default function App() {
       setVerse(data);
       generateAIBackgrounds(data.text);
     } catch (err) {
-      setError('Could not load Verse of the Day.');
+      const errorMessage = err.message === 'Failed to fetch'
+        ? 'Could not connect to the server. Please check your connection.'
+        : 'Could not load Verse of the Day.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -92,7 +95,10 @@ export default function App() {
       setVerse(data);
       generateAIBackgrounds(data.text);
     } catch (err) {
-      setError(err.message || 'Verse not found.');
+      const errorMessage = err.message === 'Failed to fetch'
+        ? 'Could not connect to the server. Please check your connection.'
+        : err.message || 'Verse not found.';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
